@@ -3,7 +3,7 @@ QUESTIONS = [
     "Avez-vous de la fièvre ?",
     "Ressentez-vous une douleur particulière ?",
     "Avez-vous des antécédents médicaux ?",
-    "Prenez-vous des médicaments actuellement ?"
+    "Prenez-vous actuellement des médicaments ?"
 ]
 
 

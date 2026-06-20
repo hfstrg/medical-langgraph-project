@@ -3,9 +3,7 @@ from app.state import MedicalState
 
 def supervisor(state: MedicalState):
 
-    question_count = state.get("question_count", 0)
-
-    if question_count < 5:
+    if not state.get("diagnostic_summary"):
         return {"next": "diagnostic_agent"}
 
     if not state.get("physician_treatment"):

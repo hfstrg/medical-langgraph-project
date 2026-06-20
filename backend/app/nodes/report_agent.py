@@ -1,19 +1,15 @@
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
-
 from app.state import MedicalState
-
-
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0.2
-)
 
 
 def report_agent(state: MedicalState):
 
-    prompt = f"""
-Génère un rapport clinique structuré.
+    report = f"""
+==============================
+RAPPORT CLINIQUE FINAL
+==============================
+
+Patient : {state.get("patient_name")}
+Âge : {state.get("patient_age")}
 
 Symptômes :
 {state.get("symptoms")}
@@ -24,21 +20,16 @@ Synthèse clinique :
 Recommandation intermédiaire :
 {state.get("interim_care")}
 
-Traitement médecin :
+Avis du médecin :
 {state.get("physician_treatment")}
 
-Ajoute obligatoirement :
-
-"Ce système ne remplace pas une consultation médicale."
+--------------------------------
+AVERTISSEMENT
+--------------------------------
+Ce système ne remplace pas une consultation médicale.
 """
 
-    response = llm.invoke(
-        [
-            HumanMessage(content=prompt)
-        ]
-    )
-
     return {
-        "final_report": response.content,
+        "final_report": report,
         "next": "FINISH"
     }
